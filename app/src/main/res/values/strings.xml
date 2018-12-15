@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BigHitDemo</string>
+    <string name="Time">Time</string>
+    <string name="Start">Start</string>
+    <string name="Reset">Reset</string>
+    <string name="Pause">Pause</string>
+    <string name="AnsweredBy">Answered By</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
