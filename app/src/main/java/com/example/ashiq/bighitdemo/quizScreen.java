@@ -1,5 +1,7 @@
 package com.example.ashiq.bighitdemo;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +41,10 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         start.setOnClickListener(this);
         reset.setOnClickListener(this);
         listView.setAdapter(adapter);
+        QuestionsFragment questionsFragment=new QuestionsFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment2,questionsFragment).commit();
+
+
 
 
 
@@ -118,6 +124,12 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         timeTextView.setText(Long.toString(seconds));
         barProgress.setProgress(Integer.parseInt(progressPercent));
 
+    }
+
+    private void updateQuestion ()
+    {
+        QuestionsFragment questionsFragment=new QuestionsFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment2,questionsFragment).commit();
     }
 
 
