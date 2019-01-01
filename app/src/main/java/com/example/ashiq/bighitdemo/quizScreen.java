@@ -1,7 +1,7 @@
 package com.example.ashiq.bighitdemo;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+
 
 
 public class quizScreen extends AppCompatActivity implements View.OnClickListener{
@@ -25,6 +27,8 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
     private long mTimeLeftInMilliseonds=START_TIME_IN_MILLISECONDS;
     private ListView listView;
     private Adapter adapter;
+    private Button[] btn = new Button[4];
+    private Button btn_unfocus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +42,20 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         listView=(ListView)findViewById(R.id.list) ;
         adapter=new Adapter(getApplicationContext());
 
+
         start.setOnClickListener(this);
         reset.setOnClickListener(this);
         listView.setAdapter(adapter);
-        QuestionsFragment questionsFragment=new QuestionsFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment2,questionsFragment).commit();
 
 
+
+        for(int i = 0; i < btn.length; i++){
+            btn[i] = (Button) findViewById(btn_id[i]);
+            btn[i].setBackgroundResource(R.drawable.buttonborder);
+            btn[i].setOnClickListener(this);
+        }
+
+        btn_unfocus = btn[0];
 
 
 
@@ -70,6 +81,23 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.btnreset:
                     resetTimer();
+                break;
+
+
+            case R.id.button:
+                setFocus(btn_unfocus, btn[0]);
+                break;
+
+            case R.id.button2:
+                setFocus(btn_unfocus, btn[1]);
+                break;
+
+            case R.id.button3:
+                setFocus(btn_unfocus, btn[2]);
+                break;
+
+            case R.id.button4:
+                setFocus(btn_unfocus, btn[3]);
                 break;
 
 
@@ -128,11 +156,14 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateQuestion ()
     {
-        QuestionsFragment questionsFragment=new QuestionsFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment2,questionsFragment).commit();
+
     }
 
-
+    private void setFocus(Button btn_unfocus, Button btn_focus){
+        btn_unfocus.setBackgroundResource(R.drawable.buttonborder);
+        btn_focus.setBackgroundResource(R.drawable.buttonborder2);
+        this.btn_unfocus = btn_focus;
+    }
 
 
 
