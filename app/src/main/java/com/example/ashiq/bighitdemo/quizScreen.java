@@ -1,7 +1,5 @@
 package com.example.ashiq.bighitdemo;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,14 +9,17 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.ashiq.bighitdemo.Model.QuestionsModel;
+import com.example.ashiq.bighitdemo.Model.ScoreQuestionSingleton;
 
+import java.util.ArrayList;
 
 
 public class quizScreen extends AppCompatActivity implements View.OnClickListener{
 
 
     private Button start,reset;
-    private int[] btn_id = {R.id.button, R.id.button2, R.id.button3, R.id.button4};
+    private int[] btn_id = {R.id.button1, R.id.button2, R.id.button3, R.id.button4};
     private TextView timeTextView;
     private ProgressBar barProgress;
     private static final long START_TIME_IN_MILLISECONDS=10000;
@@ -29,6 +30,9 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
     private Adapter adapter;
     private Button[] btn = new Button[4];
     private Button btn_unfocus;
+    private ScoreQuestionSingleton scoreQuestionSingleton;
+    ArrayList<QuestionsModel> questionsModelsArray;
+    private TextView questionText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +43,11 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         reset=(Button)findViewById(R.id.btnreset);
         timeTextView=(TextView) findViewById(R.id.time);
         barProgress=(ProgressBar) findViewById(R.id.progressBar);
+        questionText=(TextView) findViewById(R.id.questionText);
         listView=(ListView)findViewById(R.id.list) ;
         adapter=new Adapter(getApplicationContext());
+        scoreQuestionSingleton = new ScoreQuestionSingleton(getApplicationContext());
+        questionsModelsArray = scoreQuestionSingleton.getQuestions();
 
 
         start.setOnClickListener(this);
@@ -60,6 +67,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
 
         updateCountDownText();
+        updateQuestion();
 
     }
 
@@ -84,7 +92,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 break;
 
 
-            case R.id.button:
+            case R.id.button1:
                 setFocus(btn_unfocus, btn[0]);
                 break;
 
@@ -156,6 +164,14 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateQuestion ()
     {
+        QuestionsModel questionsModel = questionsModelsArray.get(1);
+
+        questionText.setText(questionsModel.getQuestions());
+
+        btn[0].setText(questionsModel.getOptionA());
+        btn[1].setText(questionsModel.getOptionB());
+        btn[2].setText(questionsModel.getOptionC());
+        btn[3].setText(questionsModel.getOptionD());
 
     }
 

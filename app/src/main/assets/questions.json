@@ -1,47 +1,47 @@
 [
   {
-    "questions": "District Hospital",
-    "optionA": "N/A",
-    "optionB": "01730 32 47 70",
-    "optionC": "Mobile phone health service",
-    "optionD": "Mobile phone health service",
-    "Answer": "Mobile phone health service"
+    "questions": "Among the biotic components of the ecosystem, the producer system is ?",
+    "optionA": "Sea",
+    "optionB": "Rivers",
+    "optionC": "Green Plants",
+    "optionD": "Animals",
+    "Answer": "C"
 
   },
   {
-    "questions": "District Hospital",
-    "optionA": "N/A",
-    "optionB": "01730 32 47 70",
-    "optionC": "Mobile phone health service",
-    "optionD": "Mobile phone health service",
-    "Answer": "Mobile phone health service"
+    "questions": "Which of has following group of gases contribute to the 'Green House Effect' ?",
+    "optionA": "Carbon tetrafluoride and Nitrous oxide",
+    "optionB": "Carbon monoxide and Sulphur dioxide",
+    "optionC": "Ammonia and Ozone",
+    "optionD": "Carbon dioxide and Methane",
+    "Answer": "D"
 
   },
   {
-    "questions": "District Hospital",
-    "optionA": "N/A",
-    "optionB": "01730 32 47 70",
-    "optionC": "Mobile phone health service",
-    "optionD": "Mobile phone health service",
-    "Answer": "Mobile phone health service"
+    "questions": "Which one of the following disease is not transmitted by tiger mosquitoes ?",
+    "optionA": "Dengue",
+    "optionB": "Chikungunya",
+    "optionC": "Japanese Encephalitis",
+    "optionD": "Yellow fever",
+    "Answer": "C"
 
   },
   {
-    "questions": "District Hospital",
-    "optionA": "N/A",
-    "optionB": "01730 32 47 70",
-    "optionC": "Mobile phone health service",
-    "optionD": "Mobile phone health service",
-    "Answer": "Mobile phone health service"
+    "questions": "Which one of the following air pollution can affect blood stream leading to death ?",
+    "optionA": "Cadmium",
+    "optionB": "Asbestos dust",
+    "optionC": "Carbon monodioxide",
+    "optionD": "Lead",
+    "Answer": "C"
 
   },
   {
-    "questions": "District Hospital",
-    "optionA": "N/A",
-    "optionB": "01730 32 47 70",
-    "optionC": "Mobile phone health service",
-    "optionD": "Mobile phone health service",
-    "Answer": "Mobile phone health service"
+    "questions": "What is Pollination ?",
+    "optionA": "germination of pollen grains",
+    "optionB": "growth of pollen tube in ovule",
+    "optionC": "transfer of pollen from anther to stigma",
+    "optionD": "visiting flowers by insects",
+    "Answer": "C"
 
   }
 ]
