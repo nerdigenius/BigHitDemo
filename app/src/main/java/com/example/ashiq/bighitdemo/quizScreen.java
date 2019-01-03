@@ -33,6 +33,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
     private ScoreQuestionSingleton scoreQuestionSingleton;
     ArrayList<QuestionsModel> questionsModelsArray;
     private TextView questionText;
+    private int QuestionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +49,12 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         adapter=new Adapter(getApplicationContext());
         scoreQuestionSingleton = new ScoreQuestionSingleton(getApplicationContext());
         questionsModelsArray = scoreQuestionSingleton.getQuestions();
-
+        QuestionNumber=0;
 
         start.setOnClickListener(this);
         reset.setOnClickListener(this);
         listView.setAdapter(adapter);
+
 
 
 
@@ -67,7 +69,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
 
         updateCountDownText();
-        updateQuestion();
+        updateQuestion(QuestionNumber);
 
     }
 
@@ -130,6 +132,9 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 reset.setEnabled(true);
                 timerRunning=false;
                 updateCountDownText();
+                QuestionNumber++;
+                updateQuestion(QuestionNumber);
+                resetTimer();
             }
         }.start();
         timerRunning=true;
@@ -162,16 +167,31 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    private void updateQuestion ()
+    private void updateQuestion (int incomingQuestionNumber)
     {
-        QuestionsModel questionsModel = questionsModelsArray.get(1);
 
-        questionText.setText(questionsModel.getQuestions());
 
-        btn[0].setText(questionsModel.getOptionA());
-        btn[1].setText(questionsModel.getOptionB());
-        btn[2].setText(questionsModel.getOptionC());
-        btn[3].setText(questionsModel.getOptionD());
+        if(incomingQuestionNumber<questionsModelsArray.size())
+        {
+            QuestionsModel questionsModel = questionsModelsArray.get(incomingQuestionNumber);
+            questionText.setText(questionsModel.getQuestions());
+
+            btn[0].setText(questionsModel.getOptionA());
+            btn[1].setText(questionsModel.getOptionB());
+            btn[2].setText(questionsModel.getOptionC());
+            btn[3].setText(questionsModel.getOptionD());
+        }
+
+        else
+        {
+            questionText.setText("End of Questions!!!");
+
+            btn[0].setText("");
+            btn[1].setText("");
+            btn[2].setText("");
+            btn[3].setText("");
+        }
+
 
     }
 
