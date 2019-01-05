@@ -89,6 +89,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 QuestionNumber++;
                 updateQuestion(QuestionNumber);
                 resetTimer();
+                resetButtonFocus();
 
                 QuestionLayout.startAnimation(fab_open);
 
@@ -172,13 +173,13 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 {
                     checkAnswer();
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                             QuestionLayout.startAnimation(fab_close);
+                        }
+                    }, 3000);
 
-                    QuestionLayout.startAnimation(fab_close);
 
                 }
 
@@ -198,10 +199,15 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         QuestionsModel questionsModel = questionsModelsArray.get(QuestionNumber);
         if ( btn_unfocus.getId() == btn_id[questionsModel.getAnswer()])
         {
-            btn_unfocus.setBackgroundColor(0xFFFF0000);
+            btn_unfocus.setBackgroundResource(R.drawable.right_answer_button);
         }
         else
         {
+
+            Button button=btn_unfocus;
+            button.setBackgroundResource(R.drawable.wrong_answer_button);
+            button=btn[questionsModel.getAnswer()];
+            button.setBackgroundResource(R.drawable.right_answer_button);
 
         }
 
@@ -280,6 +286,17 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         btn_unfocus.setBackgroundResource(R.drawable.buttonborder);
         btn_focus.setBackgroundResource(R.drawable.buttonborder2);
         this.btn_unfocus = btn_focus;
+    }
+
+    private void resetButtonFocus(){
+
+        for(int i = 0; i < btn.length; i++){
+            btn[i] = (Button) findViewById(btn_id[i]);
+            btn[i].setBackgroundResource(R.drawable.buttonborder);
+
+        }
+
+
     }
 
 
