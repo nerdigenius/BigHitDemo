@@ -5,7 +5,7 @@
     "optionB": "Rivers",
     "optionC": "Green Plants",
     "optionD": "Animals",
-    "Answer": "C"
+    "Answer": 2
 
   },
   {
@@ -14,7 +14,7 @@
     "optionB": "Carbon monoxide and Sulphur dioxide",
     "optionC": "Ammonia and Ozone",
     "optionD": "Carbon dioxide and Methane",
-    "Answer": "D"
+    "Answer": 3
 
   },
   {
@@ -23,7 +23,7 @@
     "optionB": "Chikungunya",
     "optionC": "Japanese Encephalitis",
     "optionD": "Yellow fever",
-    "Answer": "C"
+    "Answer": 2
 
   },
   {
@@ -32,7 +32,7 @@
     "optionB": "Asbestos dust",
     "optionC": "Carbon monodioxide",
     "optionD": "Lead",
-    "Answer": "C"
+    "Answer": 2
 
   },
   {
@@ -41,7 +41,7 @@
     "optionB": "growth of pollen tube in ovule",
     "optionC": "transfer of pollen from anther to stigma",
     "optionD": "visiting flowers by insects",
-    "Answer": "C"
+    "Answer": 2
 
   }
 ]

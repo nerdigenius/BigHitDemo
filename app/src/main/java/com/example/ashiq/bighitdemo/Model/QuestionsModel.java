@@ -2,15 +2,16 @@ package com.example.ashiq.bighitdemo.Model;
 
 public class QuestionsModel {
 
-    String questions,optionA,optionB,optionc,optionD,Answer;
+    String questions,optionA,optionB,optionc,optionD;
+    int Answer;
 
-    public QuestionsModel(String questions, String optionA, String optionB, String optionc, String optionD, String answer) {
+    public QuestionsModel(String questions, String optionA, String optionB, String optionc, String optionD, int answer) {
         this.questions = questions;
         this.optionA = optionA;
         this.optionB = optionB;
         this.optionc = optionc;
         this.optionD = optionD;
-        Answer = answer;
+        this.Answer = answer;
     }
 
     public String getQuestions() {
@@ -33,7 +34,7 @@ public class QuestionsModel {
         return optionD;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
         return Answer;
     }
 }

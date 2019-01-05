@@ -44,7 +44,7 @@ public class ScoreQuestionSingleton {
                 String optionB= obj.getString("optionB");
                 String optionC=obj.getString("optionC");
                 String optionD=obj.getString("optionD");
-                String Answer=obj.getString("Answer");
+                int Answer=obj.getInt("Answer");
 
                 questionsModel = new QuestionsModel(question,optionA,optionB,optionC,optionD,Answer);
 

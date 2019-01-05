@@ -1,9 +1,15 @@
 package com.example.ashiq.bighitdemo;
 
+import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -34,6 +40,10 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
     ArrayList<QuestionsModel> questionsModelsArray;
     private TextView questionText;
     private int QuestionNumber;
+    private ConstraintLayout QuestionLayout;
+    private Animation fab_open,fab_close;
+    private Boolean EndOfQuiz;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +60,14 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         scoreQuestionSingleton = new ScoreQuestionSingleton(getApplicationContext());
         questionsModelsArray = scoreQuestionSingleton.getQuestions();
         QuestionNumber=0;
+        QuestionLayout=(ConstraintLayout) findViewById(R.id.questionLayout);
+        fab_open= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
+        fab_close= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+        EndOfQuiz=false;
 
         start.setOnClickListener(this);
         reset.setOnClickListener(this);
         listView.setAdapter(adapter);
-
-
-
 
         for(int i = 0; i < btn.length; i++){
             btn[i] = (Button) findViewById(btn_id[i]);
@@ -66,12 +77,37 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
         btn_unfocus = btn[0];
 
+        fab_close.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                QuestionNumber++;
+                updateQuestion(QuestionNumber);
+                resetTimer();
+
+                QuestionLayout.startAnimation(fab_open);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
 
 
         updateCountDownText();
         updateQuestion(QuestionNumber);
 
     }
+
+
 
 
     @Override
@@ -132,15 +168,47 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
                 reset.setEnabled(true);
                 timerRunning=false;
                 updateCountDownText();
-                QuestionNumber++;
-                updateQuestion(QuestionNumber);
-                resetTimer();
+                if(EndOfQuiz!=true)
+                {
+                    checkAnswer();
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    QuestionLayout.startAnimation(fab_close);
+
+                }
+
+
+
+
             }
         }.start();
         timerRunning=true;
         start.setText(R.string.Pause);
         reset.setEnabled(false);
     }
+
+
+    private void checkAnswer(){
+
+        QuestionsModel questionsModel = questionsModelsArray.get(QuestionNumber);
+        if ( btn_unfocus.getId() == btn_id[questionsModel.getAnswer()])
+        {
+            btn_unfocus.setBackgroundColor(0xFFFF0000);
+        }
+        else
+        {
+
+        }
+
+    }
+
+
+
     private void resetTimer(){
 
         mTimeLeftInMilliseonds = START_TIME_IN_MILLISECONDS;
@@ -149,12 +217,16 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
+
+
     private void pauseTimer(){
         countDownTimer.cancel();
         timerRunning=false;
         start.setText(R.string.Start);
         reset.setEnabled(true);
     }
+
+
 
     private void updateCountDownText(){
 
@@ -167,6 +239,8 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
+
+
     private void updateQuestion (int incomingQuestionNumber)
     {
 
@@ -176,6 +250,7 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
             QuestionsModel questionsModel = questionsModelsArray.get(incomingQuestionNumber);
             questionText.setText(questionsModel.getQuestions());
 
+
             btn[0].setText(questionsModel.getOptionA());
             btn[1].setText(questionsModel.getOptionB());
             btn[2].setText(questionsModel.getOptionC());
@@ -184,6 +259,8 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
 
         else
         {
+
+            EndOfQuiz=true;
             questionText.setText("End of Questions!!!");
 
             btn[0].setText("");
@@ -193,9 +270,13 @@ public class quizScreen extends AppCompatActivity implements View.OnClickListene
         }
 
 
+
     }
 
+
+
     private void setFocus(Button btn_unfocus, Button btn_focus){
+
         btn_unfocus.setBackgroundResource(R.drawable.buttonborder);
         btn_focus.setBackgroundResource(R.drawable.buttonborder2);
         this.btn_unfocus = btn_focus;
